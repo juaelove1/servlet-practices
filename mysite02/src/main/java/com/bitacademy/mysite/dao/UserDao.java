@@ -3,19 +3,75 @@ package com.bitacademy.mysite.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.bitacademy.mysite.vo.Uservo;
 
 public class UserDao {
 	
-	boolean result = false;
-	Connection conn =null;
-	PreparedStatement pstmt = null;
+
+	public Uservo findByEmailAndPassword(Uservo vo) throws SQLException{
+		
+		Uservo userVo = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+		conn = getConnection();
+		
+		String sql="select no,name from user where email=? and password=?";
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, vo.getEmail());
+		pstmt.setString(2, vo.getPassword());
+
+		
+		rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			
+			Long no = rs.getLong(1);
+			String name = rs.getString(2);
+			
+			userVo = new Uservo();
+			userVo.setNo(no);
+			userVo.setName(name);
+			
+		}
+		}catch(SQLException e) {
+			
+			System.out.println("error"+e);
+		}finally {
+			if(rs!=null) {
+				
+				rs.close();
+				
+			}
+			if(pstmt!=null) {
+				
+				pstmt.close();
+			}
+			
+			if(conn!=null) {
+				
+				conn.close();
+			}
+		}
+		
+
+		return userVo;
+		
+		
+	}
+	
 	
 	public boolean insert(Uservo vo) throws SQLException {
 		
 		boolean result = false;
 		Connection conn = null;
+		PreparedStatement pstmt = null;
 		
 		try {
 		conn = getConnection();
