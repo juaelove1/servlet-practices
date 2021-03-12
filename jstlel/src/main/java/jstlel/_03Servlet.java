@@ -1,48 +1,43 @@
 package jstlel;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/02")
-public class _02Servlet extends HttpServlet {
+@WebServlet("/03")
+public class _03Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/**
-		 * 1. 객체가 오래 존속되는 순서
-		 *   
-		 *   Application(Context) Scope > Session Scope > Request Scope > Page Scope
-		 * 
-		 * 2. EL에서 이름을 찾는 순서
-		 * 
-		 *   Application(Context) Scope < Session Scope < Request Scope < Page Scope
-		 *   
-		 * 주의: 같은 이름으로 여러 범위에 객체를 저장하지 말 것!
-		 *   
-		 */
+		List<Uservo> list = new ArrayList<>();
 		
-		// request scope
 		Uservo vo1 = new Uservo();
-		vo1.setNo(1L);
+		vo1.setNo(10L);
 		vo1.setName("김지수1");
+		list.add(vo1);
 		
-		request.setAttribute("vo", vo1);
-		
-		// session scope
 		Uservo vo2 = new Uservo();
-		vo2.setNo(2L);
+		vo2.setNo(20L);
 		vo2.setName("김지수2");
+		list.add(vo2);
+
+		Uservo vo3 = new Uservo();
+		vo3.setNo(30L);
+		vo3.setName("김지수3");
+		list.add(vo3);
 		
-		request.getSession(true).setAttribute("vo", vo2);
-		
-		request.getRequestDispatcher("/WEB-INF/views/02.jsp").forward(request, response);
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/WEB-INF/views/03.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 }
