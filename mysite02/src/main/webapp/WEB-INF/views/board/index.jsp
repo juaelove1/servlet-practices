@@ -10,6 +10,7 @@
 <link href="${pageContext.request.contextPath }/assets/css/board.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+ 
 	<div id="container">
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
@@ -28,29 +29,24 @@
 						<th>&nbsp;</th>
 					</tr>				
 					<tr>
-						<td>3</td>
-						<td><a href="" style="text-align:left; padding-left:0px">첫 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-10-11 12:04:20</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td><a href="" style="text-align:left; padding-left:20px"><img src="${pageContext.request.contextPath}/assets/images/reply.png"/>두 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-10-02 12:04:12</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td><a href="" style="text-align:left; padding-left:40px"><img src="${pageContext.request.contextPath}/assets/images/reply.png"/>세 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-09-25 07:24:32</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
+				  <c:set var="count" value= "${fn:length(list)}" />
+				    <c:forEach items="${list}" var="vo" varStatus="status">
+				 
+						<!-- 게시판 리스트 -->
+							<tr>
+								<td>${count-status.index}</td>
+								<td><a href="${pageContext.request.contextPath}/board?a=view&no=${vo.no}"><c:out value="${vo.title}" /></a></td>
+								<td>${vo.writer}</td>
+								<td>${vo.view}</td>
+								<td>${vo.date}</td>
+						<c:choose>
+                           <c:when test="${authUser.name == vo.writer}"> <!-- 본인글이면 -->
+                             	<td><a href="${pageContext.request.contextPath}/board?a=delete&no=${vo.no}" class="del">삭제</a></td>
+                           </c:when>
+                           
+                       </c:choose>    				
+							</tr>	
+					</c:forEach>
 				</table>
 				
 				<!-- pager 추가 -->
@@ -66,10 +62,13 @@
 					</ul>
 				</div>					
 				<!-- pager 추가 -->
-				
-				
 				<div class="bottom">
-					<a href="" id="new-book">글쓰기</a>
+				  <!-- 로그인시에만 글쓰기 버튼나오기 -->
+				        <c:choose>
+                           <c:when test="${!empty authUser}">
+                       <a href="${pageContext.request.contextPath}/board?a=writeform"  id="new-book">글쓰기</a>
+                           </c:when>
+                        </c:choose>    
 				</div>				
 			</div>
 		</div>
