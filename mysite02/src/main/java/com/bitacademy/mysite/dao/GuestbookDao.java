@@ -14,7 +14,7 @@ import com.bitacademy.mysite.vo.GuestbookVo;;
 public class GuestbookDao {
 
 	
-	//---------------------- DB에 insert -----------------------
+	//---------------------- DB insert -----------------------
 	public boolean insert(GuestbookVo vo) {
 
 		boolean result =false;

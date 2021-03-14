@@ -116,7 +116,7 @@ public class UserDao {
 			//1. JDBC Driver 로딩
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			//2. 연결하기
+			//2. 연결
 			String url ="jdbc:mysql://localhost:3306/webdb?characterEncoding=utf8&serverTimezone=UTC";
 			conn = DriverManager.getConnection(url, "webdb","webdb");
 		}catch(ClassNotFoundException e) {

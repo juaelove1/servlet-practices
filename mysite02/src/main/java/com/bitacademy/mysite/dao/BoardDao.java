@@ -14,7 +14,7 @@ import com.bitacademy.mysite.vo.BoardVo;
 
 public class BoardDao {
 	
-	//---------------------- DB에 insert(새글일경우) -----------------------
+	//---------------------- DB에 insert(새글) -----------------------
 		public boolean insert(BoardVo vo) {
 
 			boolean result =false;
