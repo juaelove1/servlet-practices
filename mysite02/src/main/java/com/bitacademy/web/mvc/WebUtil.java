@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class WebUtil {
-	public static void redirect( //redirect
+	public static void redirect( 
 			String url,
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
