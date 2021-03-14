@@ -55,7 +55,7 @@ public class GuestbookServlet extends HttpServlet {
 		} else { //index
 			
 			List<GuestbookVo> list = new GuestbookDao().findAll();
-			
+						
 			// forwarding = request dispatch = request extension
 			request.setAttribute("list", list);
 			WebUtil.forward("/WEB-INF/views/guestbook/index.jsp", request, response);
