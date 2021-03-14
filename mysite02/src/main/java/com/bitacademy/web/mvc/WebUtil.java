@@ -8,14 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class WebUtil {
-	public static void redirect(
+	public static void redirect( //redirect
 			String url,
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.sendRedirect(url);
 	}
 	
-	public static void forward(
+	public static void forward(//forward
 			String path,
 			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
