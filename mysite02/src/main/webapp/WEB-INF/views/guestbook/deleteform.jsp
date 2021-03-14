@@ -26,7 +26,7 @@
 					<input type="password" name="password">
 					<input type="submit" value="확인">
 				</form>
-				<a href="<%=request.getContextPath()%>/guestbook">방명록 리스트</a>
+				<a href="<%=request.getContextPath()%>/guestbook">방명록 리스트 </a>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp" />
