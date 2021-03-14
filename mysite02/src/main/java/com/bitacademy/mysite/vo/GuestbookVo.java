@@ -41,4 +41,13 @@ public class GuestbookVo {
 	public void setReq_date(Date req_date) {
 		this.req_date = req_date;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "GuestbookVo [no=" + no + ", name=" + name + ", password=" + password + ", contents=" + contents
+				+ ", req_date=" + req_date + "]";
+	}
+	
+	
 }

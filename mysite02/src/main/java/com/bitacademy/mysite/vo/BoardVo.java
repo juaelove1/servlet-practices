@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class BoardVo {
 	
-	private int no;//글의 번호
+	private int no;//글 번호
 	private String title; //글의 제목
 	private String writer; //글의 작성자
 	private String content; //글의 내용
