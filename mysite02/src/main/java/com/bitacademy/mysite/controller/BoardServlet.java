@@ -21,7 +21,7 @@ public class BoardServlet extends HttpServlet {
 		
 		String action = request.getParameter("a");
 		
-		if("writeform".equals(action)) { //글작성form
+		if("writeform".equals(action)) { //글작성form으로
 			
 			WebUtil.forward("/WEB-INF/views/board/write.jsp", request, response);
 			
