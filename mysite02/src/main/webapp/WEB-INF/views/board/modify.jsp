@@ -18,6 +18,7 @@
 					<input type = "hidden" name = "a" value="modify">
 					<table class="tbl-ex">
 						<tr>
+						    <!-- 글수정 form -->
 							<th colspan="2">글수정</th>
 						</tr>
 						<c:forEach items="${list}" var="list">

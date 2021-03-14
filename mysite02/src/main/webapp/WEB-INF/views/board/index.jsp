@@ -32,7 +32,7 @@
 				  <c:set var="count" value= "${fn:length(list)}" />
 				    <c:forEach items="${list}" var="vo" varStatus="status">
 				 
-						<!-- 게시판 리스트 -->
+						<!-- 게시판리스트 -->
 							<tr>
 								<td>${count-status.index}</td>
 								<td><a href="${pageContext.request.contextPath}/board?a=view&no=${vo.no}"><c:out value="${vo.title}" /></a></td>

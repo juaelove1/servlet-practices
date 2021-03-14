@@ -45,7 +45,7 @@
                                 <a href="${pageContext.request.contextPath}/board?a=modifyform&no=${list.no}">글수정</a>
                            </c:when>
                        </c:choose>
-               <!-- 로그인시에만 답글 버튼나오기 -->
+               <!-- 로그인시만 답글 버튼나오기 -->
 			   <c:choose>
                  <c:when test="${!empty authUser}">
                     <a href="${pageContext.request.contextPath}/board?a=writeform">답글</a>	

@@ -17,6 +17,7 @@
 				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board">
 					<input type = "hidden" name = "a" value="write">
 					<table class="tbl-ex">
+					<!-- 글작성 -->
 						<tr>
 							<th colspan="2">글쓰기</th>
 						</tr>
