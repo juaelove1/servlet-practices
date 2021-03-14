@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.bitacademy.mysite.dao.BoardDao;
-import com.bitacademy.mysite.dao.GuestbookDao;
 import com.bitacademy.mysite.vo.BoardVo;
-import com.bitacademy.mysite.vo.GuestbookVo;
 import com.bitacademy.mysite.vo.Uservo;
 import com.bitacademy.web.mvc.WebUtil;
 
@@ -29,8 +27,6 @@ public class BoardServlet extends HttpServlet {
 			
 		}else if("write".equals(action)) { //글작성하기
 			
-			String no = request.getParameter("no");
-
 			String title = request.getParameter("title"); //글의 제목가져오기
 			
 			
