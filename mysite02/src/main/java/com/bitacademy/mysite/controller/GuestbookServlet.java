@@ -22,7 +22,7 @@ public class GuestbookServlet extends HttpServlet {
 			
 			WebUtil.forward("/WEB-INF/views/guestbook/deleteform.jsp", request, response);
 			
-		}else if("delete".equals(action)) { //delete하기
+		}else if("delete".equals(action)) { //delete
 			
 			String no = request.getParameter("no");
 		    Long number = Long.parseLong(no);
