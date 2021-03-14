@@ -52,7 +52,7 @@ public class UserServlet extends HttpServlet {
 					
 				}
 				
-				//인증처리
+				//인증 처리
 				HttpSession session = request.getSession(true);
 				session.setAttribute("authUser", authUser);
 				

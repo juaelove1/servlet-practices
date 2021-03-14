@@ -51,7 +51,7 @@ public class MainServlet extends HttpServlet {
 			}
 		}
 		
-		//쿠키 쓰기
+		//쿠키 
 		visitCount++;
 		
 		
