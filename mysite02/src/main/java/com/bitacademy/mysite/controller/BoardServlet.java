@@ -187,7 +187,7 @@ public class BoardServlet extends HttpServlet {
 			WebUtil.redirect(request.getContextPath() + "/board", request, response);
 			
 		}else { // 글목록보기
-						
+			
             List<BoardVo> list = new BoardDao().findAll();
 								
 			// forwarding = request dispatch = request extension

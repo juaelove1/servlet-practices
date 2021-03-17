@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +61,7 @@
 				
 				<!-- pager 추가 -->
 				<div class="pager">
-					<ul>
+				  	<ul>
 						<li><a href="">◀</a></li>
 						<li class="selected"><a href="/mysite02/board?p=1">1</a></li>
 						<li><a href="/mysite02/board?p=2">2</a></li>
