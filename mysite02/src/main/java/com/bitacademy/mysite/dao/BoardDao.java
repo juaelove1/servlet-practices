@@ -85,7 +85,7 @@ public class BoardDao {
 				
 
 				//3. SQL 준비
-				String sql = "select no,title,writer,view,date from board order by group_no desc, order_no asc;";
+				String sql = "select no,title,writer,view,depth,date from board order by group_no desc, order_no asc;";
 				pstmt = conn.prepareStatement(sql);
 
 				//4. 바인딩
@@ -100,13 +100,15 @@ public class BoardDao {
 					String title = rs.getString(2);
 					String writer = rs.getString(3);
 					int view = rs.getInt(4);
-					Date date = rs.getDate(5);
+					int depth = rs.getInt(5);
+					Date date = rs.getDate(6);
 
 					BoardVo  vo = new BoardVo();
 					vo.setNo(no);
 				    vo.setTitle(title);
 				    vo.setWriter(writer);
 				    vo.setView(view);
+				    vo.setDepth(depth);
 				    vo.setDate(date);
 					
 					list.add(vo);
@@ -336,6 +338,131 @@ public class BoardDao {
 
 						//4. 바인딩
 						pstmt.setInt(1, no);
+						
+						//5. SQL문 실행
+						int count = pstmt.executeUpdate();
+						
+						//6. 결과
+						result = count == 1;
+
+
+					}catch(SQLException e) {
+
+						System.out.println("error"+e);
+					}finally {
+
+						try {
+
+							if(pstmt!=null) {
+
+								pstmt.close();
+
+							}
+							if(conn!=null) {
+								conn.close();}
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
+
+					return result;
+				}
+				
+				
+				//---------------------- 답글쓸 글의 group_no,order_no,depth가져오기 -----------------------
+				public List<BoardVo> FindInfo(int no) throws SQLException{
+
+					List<BoardVo> list = new ArrayList<>();
+					Connection conn = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs =null;
+
+					try {
+
+						conn = getConnection();
+						
+
+						//3. SQL 준비
+						String sql = "select group_no,order_no,depth from board where no=?";
+						pstmt = conn.prepareStatement(sql);
+
+						pstmt.setInt(1, no);
+						
+						rs = pstmt.executeQuery();
+
+						//6. 데이터가져오기
+					
+					while(rs.next()) {
+						
+						int group_no = rs.getInt(1);
+						int order_no = rs.getInt(2);
+						int depth = rs.getInt(3);
+
+						BoardVo  boardvo = new BoardVo();
+							
+						boardvo.setGroup_no(group_no);
+						boardvo.setOrder_no(order_no);
+						boardvo.setDepth(depth);
+							
+						list.add(boardvo);
+						
+					}
+						
+					}catch(SQLException e) {
+
+						System.out.println("error"+e);
+					}finally {
+
+						try {
+
+							if(rs!=null) {
+
+								rs.close();
+							}
+							if(pstmt!=null) {
+
+								pstmt.close();
+
+							}
+							if(conn!=null) {
+								conn.close();}
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
+
+
+					return list;
+				}
+				
+				
+				//---------------------- DB에 insert(답글) -----------------------
+				public boolean Reply_insert(BoardVo vo) {
+
+					boolean result =false;
+					Connection conn = null;
+					PreparedStatement pstmt =null;
+
+					try {
+						
+						conn = getConnection();
+
+						//3. SQL 준비 
+						String sql = "insert into board values(null,?,?,?,0,?,?,?,now())";
+						pstmt = conn.prepareStatement(sql);
+
+						//4. 바인딩
+						pstmt.setString(1, vo.getTitle());
+						pstmt.setString(2, vo.getWriter());
+						pstmt.setString(3, vo.getContent());
+						pstmt.setInt(4, vo.getGroup_no());
+						pstmt.setInt(5, vo.getOrder_no());
+						pstmt.setInt(6, vo.getDepth());
+
 						
 						//5. SQL문 실행
 						int count = pstmt.executeUpdate();
