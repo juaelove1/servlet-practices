@@ -39,7 +39,7 @@
 								<td>${count-status.index}</td>
 								 <c:choose>
                                      <c:when test = "${vo.depth>0}">
-                                        <td><img style="margin-left: ${vo.depth*20}px; " id="reply" src="${pageContext.request.contextPath}/assets/images/reply.png"><a href="${pageContext.request.contextPath}/board?a=view&no=${vo.no}"><c:out value="${vo.title}" /></a></td>
+                                        <td><img style="padding-left:${(vo.depth-1)*20}px; " id="reply" src="${pageContext.request.contextPath}/assets/images/reply.png"><a href="${pageContext.request.contextPath}/board?a=view&no=${vo.no}"><c:out value="${vo.title}" /></a></td>
                                      </c:when>
                                      <c:otherwise>
 								         <td><a href="${pageContext.request.contextPath}/board?a=view&no=${vo.no}"><c:out value="${vo.title}" /></a></td>

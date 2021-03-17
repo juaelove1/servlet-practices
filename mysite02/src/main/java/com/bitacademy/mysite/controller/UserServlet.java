@@ -84,25 +84,61 @@ public class UserServlet extends HttpServlet {
 			
 		} else if("updateform".equals(action)) {
 			
-			/// Access Control (접근 제어)
+			// Access Control (접근 제어)
 			HttpSession session = request.getSession();
 			if(session == null) {
 				WebUtil.redirect(request.getContextPath(), request, response);
 				return;	
 			}
-			
+
 			Uservo authUser = (Uservo)session.getAttribute("authUser");
 			if(authUser == null ) {
 				WebUtil.redirect(request.getContextPath(), request, response);
 				return;	
 			}
-			
+
 			Long no = authUser.getNo();
-			//UserVo userVo = new UserDao().findByNo(no);
-			Uservo userVo = new Uservo();
-			
-			request.setAttribute("userVo", userVo);
+			Uservo userVo;
+			try {
+				
+				userVo = new UserDao().findByNo(no);
+				request.setAttribute("userVo", userVo);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
 			WebUtil.forward("/WEB-INF/views/user/updateform.jsp", request, response);
+			
+		}else if("update".equals(action)) {
+			
+
+            String name = request.getParameter("name");
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+			String gender = request.getParameter("gender");
+			
+			Uservo vo = new Uservo();
+			vo.setName(name);
+			vo.setEmail(email);
+			vo.setPassword(password);
+			vo.setGender(gender);
+
+				
+		    new UserDao().Update(vo);
+		    
+		    
+		    //회원정보를 업데이트하면 다시 로그인하기
+            HttpSession session = request.getSession();
+			
+			
+			//로그아웃처리
+			session.removeAttribute("authUser");
+			session.invalidate();	
+			
+			WebUtil.forward("/WEB-INF/views/user/loginform.jsp", request, response);
 			
 		}else if("join".equals(action)) {
 			
