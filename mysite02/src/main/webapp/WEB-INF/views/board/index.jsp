@@ -35,10 +35,18 @@
 						<!-- 게시판리스트 -->
 							<tr>
 								<td>${count-status.index}</td>
-								<td><a href="${pageContext.request.contextPath}/board?a=view&no=${vo.no}"><c:out value="${vo.title}" /></a></td>
+								 <c:choose>
+                                     <c:when test = "${vo.depth>0}">
+                                        <td><img style="margin-left: ${vo.depth*20}px; " id="reply" src="${pageContext.request.contextPath}/assets/images/reply.png"><a href="${pageContext.request.contextPath}/board?a=view&no=${vo.no}"><c:out value="${vo.title}" /></a></td>
+                                     </c:when>
+                                     <c:otherwise>
+								         <td><a href="${pageContext.request.contextPath}/board?a=view&no=${vo.no}"><c:out value="${vo.title}" /></a></td>
+								     </c:otherwise>
+								</c:choose>         
 								<td>${vo.writer}</td>
 								<td>${vo.view}</td>
 								<td>${vo.date}</td>
+								<td>${vo.depth}</td>
 						<c:choose>
                            <c:when test="${authUser.name == vo.writer}"> <!-- 본인글이면 -->
                              	<td><a href="${pageContext.request.contextPath}/board?a=delete&no=${vo.no}" class="del">삭제</a></td>

@@ -48,7 +48,7 @@
                <!-- 로그인시만 답글 버튼나오기 -->
 			   <c:choose>
                  <c:when test="${!empty authUser}">
-                    <a href="${pageContext.request.contextPath}/board?a=writeform">답글</a>	
+                    <a href="${pageContext.request.contextPath}/board?a=replyform&no=${list.no}">답글</a>	
                  </c:when>
                </c:choose>     
               </c:forEach>                   		

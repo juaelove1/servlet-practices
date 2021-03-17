@@ -127,6 +127,65 @@ public class BoardServlet extends HttpServlet {
 			WebUtil.redirect(request.getContextPath() + "/board", request, response);
 			
 			
+		}else if("replyform".equals(action)) { //답글작성form
+			
+			String no = request.getParameter("no");
+			int number = Integer.parseInt(no);
+			
+			List<BoardVo> list;
+			try {
+				
+				list = new BoardDao().FindInfo(number);
+								
+				request.setAttribute("list", list);
+				
+			} catch (SQLException e) {
+				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}
+			
+					
+			WebUtil.forward("/WEB-INF/views/board/reply.jsp", request, response);
+			
+		}else if("reply".equals(action)) { //답글작성
+			
+            String title = request.getParameter("title"); //글의 제목가져오기
+			
+			
+			HttpSession session = request.getSession(true);
+			Uservo authUser = (Uservo)session.getAttribute("authUser");
+			String writer = authUser.getName();//작성자가져오기
+			
+			
+			String content = request.getParameter("content"); //글의 내용가져오기
+			
+			String group_no = request.getParameter("group_no"); //그룹번호가져오기
+			int group_number = Integer.parseInt(group_no);
+			
+			String order_no = request.getParameter("order_no"); //그룹내 순서
+			int order_number = Integer.parseInt(order_no);
+			
+			String depth = request.getParameter("depth"); //그룹내 깊이
+			int depth_number = Integer.parseInt(depth);
+			
+			
+			BoardVo vo = new BoardVo();
+			vo.setTitle(title);
+			vo.setWriter(writer);
+			vo.setContent(content);
+			vo.setView(0);
+			vo.setGroup_no(group_number);
+			vo.setOrder_no(order_number+1);
+			vo.setDepth(depth_number+1);
+			
+			BoardDao dao = new BoardDao();
+			dao.Reply_insert(vo);
+
+				
+			WebUtil.redirect(request.getContextPath() + "/board", request, response);
+			
 		}else { // 글목록보기
 						
             List<BoardVo> list = new BoardDao().findAll();
